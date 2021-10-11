@@ -4,7 +4,7 @@
       "AuthRoleName": "amplify-awsserverlessairline-quasarone-53814-authRole",
       "UnauthRoleArn": "arn:aws:iam::231436140809:role/amplify-awsserverlessairline-quasarone-53814-unauthRole",
       "AuthRoleArn": "arn:aws:iam::231436140809:role/amplify-awsserverlessairline-quasarone-53814-authRole",
-      "Region": "eu-west-1",
+      "Region": "eu-west-2",
       "DeploymentBucketName": "amplify-awsserverlessairline-quasarone-53814-deployment",
       "UnauthRoleName": "amplify-awsserverlessairline-quasarone-53814-unauthRole",
       "StackName": "amplify-awsserverlessairline-quasarone-53814",
