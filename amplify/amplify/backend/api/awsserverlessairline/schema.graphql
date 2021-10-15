@@ -1,16 +1,17 @@
 type Bed @model @auth(rules: [{allow: private}]) {
   id: ID!
-  bedCode: String
+  bedCode: String!
 }
 
 type Stay @model @auth(rules: [{allow: private}]) {
   id: ID!
   checkInDate: AWSDate
   checkOutDate: AWSDate
-  stay: Float
+  stayPrice: Float
+  bedBooked: Bed @connection
 }
 
-type NewBooking @model @auth(rules: [{allow: private}]) {
+type Booking @model(subscriptions: null) @auth(rules: [{allow: owner, ownerField: "customer", identityField: "sub", operations: [read]}, {allow: groups, groups: ["Admin"]}]) @key(name: "ByCustomerStatus", fields: ["customer", "status"], queryField: "getBookingByStatus") {
   id: ID!
   status: BookingStatus
   paymentToken: String
@@ -19,36 +20,6 @@ type NewBooking @model @auth(rules: [{allow: private}]) {
   createdAt: String
   BookingReference: String
   stayBooked: Stay @connection
-}
-
-type Flight @model(subscriptions: null) @key(name: "ByDepartureSchedule", fields: ["departureAirportCode", "arrivalAirportCode", "departureDate"], queryField: "getFlightBySchedule") @auth(rules: [{allow: private}]) {
-  id: ID!
-  departureDate: String!
-  departureAirportCode: String!
-  departureAirportName: String!
-  departureCity: String!
-  departureLocale: String!
-  arrivalDate: String!
-  arrivalAirportCode: String!
-  arrivalAirportName: String!
-  arrivalCity: String!
-  arrivalLocale: String!
-  ticketPrice: Int!
-  ticketCurrency: String!
-  flightNumber: Int!
-  seatAllocation: Int
-  seatCapacity: Int!
-}
-
-type Booking @model(subscriptions: null) @auth(rules: [{allow: owner, ownerField: "customer", identityField: "sub", operations: [read]}, {allow: groups, groups: ["Admin"]}]) @key(name: "ByCustomerStatus", fields: ["customer", "status"], queryField: "getBookingByStatus") {
-  id: ID!
-  status: BookingStatus!
-  outboundFlight: Flight! @connection
-  paymentToken: String!
-  checkedIn: Boolean
-  customer: String
-  createdAt: String
-  bookingReference: String
 }
 
 enum BookingStatus {

@@ -16,27 +16,14 @@ export const schema = {
                     "type": {
                         "enum": "BookingStatus"
                     },
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
-                },
-                "outboundFlight": {
-                    "name": "outboundFlight",
-                    "isArray": false,
-                    "type": {
-                        "model": "Flight"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "bookingOutboundFlightId"
-                    }
                 },
                 "paymentToken": {
                     "name": "paymentToken",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 },
                 "checkedIn": {
@@ -60,12 +47,25 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "bookingReference": {
-                    "name": "bookingReference",
+                "BookingReference": {
+                    "name": "BookingReference",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
+                },
+                "stayBooked": {
+                    "name": "stayBooked",
+                    "isArray": false,
+                    "type": {
+                        "model": "Stay"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "bookingStayBookedId"
+                    }
                 }
             },
             "syncable": true,
@@ -121,8 +121,8 @@ export const schema = {
                 }
             ]
         },
-        "Flight": {
-            "name": "Flight",
+        "Stay": {
+            "name": "Stay",
             "fields": {
                 "id": {
                     "name": "id",
@@ -131,132 +131,47 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "departureDate": {
-                    "name": "departureDate",
+                "checkInDate": {
+                    "name": "checkInDate",
                     "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "departureAirportCode": {
-                    "name": "departureAirportCode",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "departureAirportName": {
-                    "name": "departureAirportName",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "departureCity": {
-                    "name": "departureCity",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "departureLocale": {
-                    "name": "departureLocale",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "arrivalDate": {
-                    "name": "arrivalDate",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "arrivalAirportCode": {
-                    "name": "arrivalAirportCode",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "arrivalAirportName": {
-                    "name": "arrivalAirportName",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "arrivalCity": {
-                    "name": "arrivalCity",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "arrivalLocale": {
-                    "name": "arrivalLocale",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "ticketPrice": {
-                    "name": "ticketPrice",
-                    "isArray": false,
-                    "type": "Int",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "ticketCurrency": {
-                    "name": "ticketCurrency",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "flightNumber": {
-                    "name": "flightNumber",
-                    "isArray": false,
-                    "type": "Int",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "seatAllocation": {
-                    "name": "seatAllocation",
-                    "isArray": false,
-                    "type": "Int",
+                    "type": "AWSDate",
                     "isRequired": false,
                     "attributes": []
                 },
-                "seatCapacity": {
-                    "name": "seatCapacity",
+                "checkOutDate": {
+                    "name": "checkOutDate",
                     "isArray": false,
-                    "type": "Int",
-                    "isRequired": true,
+                    "type": "AWSDate",
+                    "isRequired": false,
                     "attributes": []
+                },
+                "stayPrice": {
+                    "name": "stayPrice",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "bedBooked": {
+                    "name": "bedBooked",
+                    "isArray": false,
+                    "type": {
+                        "model": "Bed"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "stayBedBookedId"
+                    }
                 }
             },
             "syncable": true,
-            "pluralName": "Flights",
+            "pluralName": "Stays",
             "attributes": [
                 {
                     "type": "model",
-                    "properties": {
-                        "subscriptions": null
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "ByDepartureSchedule",
-                        "fields": [
-                            "departureAirportCode",
-                            "arrivalAirportCode",
-                            "departureDate"
-                        ],
-                        "queryField": "getFlightBySchedule"
-                    }
+                    "properties": {}
                 },
                 {
                     "type": "auth",
@@ -290,162 +205,12 @@ export const schema = {
                     "name": "bedCode",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 }
             },
             "syncable": true,
             "pluralName": "Beds",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "allow": "private",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
-        "Stay": {
-            "name": "Stay",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "checkInDate": {
-                    "name": "checkInDate",
-                    "isArray": false,
-                    "type": "AWSDate",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "checkOutDate": {
-                    "name": "checkOutDate",
-                    "isArray": false,
-                    "type": "AWSDate",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "stay": {
-                    "name": "stay",
-                    "isArray": false,
-                    "type": "Float",
-                    "isRequired": false,
-                    "attributes": []
-                }
-            },
-            "syncable": true,
-            "pluralName": "Stays",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "allow": "private",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
-        "NewBooking": {
-            "name": "NewBooking",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "status": {
-                    "name": "status",
-                    "isArray": false,
-                    "type": {
-                        "enum": "BookingStatus"
-                    },
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "paymentToken": {
-                    "name": "paymentToken",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "checkedIn": {
-                    "name": "checkedIn",
-                    "isArray": false,
-                    "type": "Boolean",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "customer": {
-                    "name": "customer",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "BookingReference": {
-                    "name": "BookingReference",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "stayBooked": {
-                    "name": "stayBooked",
-                    "isArray": false,
-                    "type": {
-                        "model": "Stay"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "newBookingStayBookedId"
-                    }
-                }
-            },
-            "syncable": true,
-            "pluralName": "NewBookings",
             "attributes": [
                 {
                     "type": "model",
@@ -508,5 +273,5 @@ export const schema = {
             }
         }
     },
-    "version": "41f99accbcf354fbb483cd6abd0fafdd"
+    "version": "59063471faf359bceafb48663341a524"
 };
