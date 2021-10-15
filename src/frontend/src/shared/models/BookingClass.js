@@ -2,7 +2,7 @@
 import { date } from 'quasar'
 import Flight from '../../shared/models/BedClass'
 /** Class representing a Booking. All permutations of data from Booking, a different date format for instance, should happen here. */
-export default class NewBooking {
+export default class Booking {
   /**
    *
    * Creates an instance of Booking.
