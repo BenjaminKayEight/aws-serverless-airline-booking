@@ -7,11 +7,11 @@
  * // return flights from earliest to latest departure
  * const filteredFlights = sortByEarliestDeparture(flights)
  */
-export const sortByEarliestDeparture = (flights) => {
-  return flights.sort((a, b) => {
-    const departureA = new Date(a.departureDate)
-    const departureB = new Date(b.departureDate)
-    return departureA.getTime() - departureB.getTime()
+export const sortByEarliestCheckIn = (stays) => {
+  return stays.sort((a, b) => {
+    const checkInA = new Date(a.checkInDate)
+    const checkInB = new Date(b.checkInDate)
+    return checkInA.getTime() - checkInB.getTime()
   })
 }
 
@@ -24,10 +24,10 @@ export const sortByEarliestDeparture = (flights) => {
  * // return flights from earliest to latest departure
  * const filteredFlights = sortByLatestDeparture(flights)
  */
-export const sortByLatestDeparture = (flights) => {
-  return flights.sort((a, b) => {
-    const departureA = new Date(a.departureDate)
-    const departureB = new Date(b.departureDate)
-    return departureB.getTime() - departureA.getTime()
+export const sortByLatestCheckIn = (stays) => {
+  return stays.sort((a, b) => {
+    const checkInA = new Date(a.checkInDate)
+    const checkInB = new Date(b.checkInDate)
+    return checkInB.getTime() - checkInA.getTime()
   })
 }

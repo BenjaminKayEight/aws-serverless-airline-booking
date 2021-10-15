@@ -1,0 +1,99 @@
+[
+    {
+        "room": "Room 1",
+        "code": "SPR1B1",
+        "building": "SitPet",
+        "name": "SitPet - Room 1 - Bed 1"
+    },
+    {
+        "room": "Room 1",
+        "code": "SPR1B2",
+        "building": "SitPet",
+        "name": "SitPet - Room 1 - Bed 2"
+    },
+    {
+        "room": "Room 1",
+        "code": "SPR1B3",
+        "building": "SitPet",
+        "name": "SitPet - Room 1 - Bed 3"
+    },
+    {
+        "room": "Room 1",
+        "code": "SPR1B4",
+        "building": "SitPet",
+        "name": "SitPet - Room 1 - Bed 4"
+    },
+    {
+        "room": "Room 2",
+        "code": "SPR2B1",
+        "building": "SitPet",
+        "name": "SitPet - Room 2 - Bed 1"
+    },
+    {
+        "room": "Room 2",
+        "code": "SPR2B2",
+        "building": "SitPet",
+        "name": "SitPet - Room 2 - Bed 2"
+    },
+    {
+        "room": "Room 2",
+        "code": "SPR2B3",
+        "building": "SitPet",
+        "name": "SitPet - Room 2 - Bed 3"
+    },
+    {
+        "room": "Room 2",
+        "code": "SPR2B4",
+        "building": "SitPet",
+        "name": "SitPet - Room 2 - Bed 4"
+    },
+    {
+        "room": "Room 2",
+        "code": "SPR2B5",
+        "building": "SitPet",
+        "name": "SitPet - Room 2 - Bed 5"
+    },
+    {
+        "room": "Room 2",
+        "code": "SPR2B6",
+        "building": "SitPet",
+        "name": "SitPet - Room 2 - Bed 6"
+    },
+    {
+        "room": "Room 2",
+        "code": "SPR2B7",
+        "building": "SitPet",
+        "name": "SitPet - Room 2 - Bed 7"
+    },
+    {
+        "room": "Room 2",
+        "code": "SPR2B8",
+        "building": "SitPet",
+        "name": "SitPet - Room 2 - Bed 8"
+    },
+    {
+        "room": "Room 3",
+        "code": "SPR3B1",
+        "building": "SitPet",
+        "name": "SitPet - Room 3 - Bed 1"
+    },
+    {
+        "room": "Room 3",
+        "code": "SPR3B2",
+        "building": "SitPet",
+        "name": "SitPet - Room 3 - Bed 2"
+    },
+    {
+        "room": "Room 3",
+        "code": "SPR3B3",
+        "building": "SitPet",
+        "name": "SitPet - Room 3 - Bed 3"
+    },
+    {
+        "room": "Room 3",
+        "code": "SPR3B4",
+        "building": "SitPet",
+        "name": "SitPet - Room 3 - Bed 4"
+    }
+]
+    

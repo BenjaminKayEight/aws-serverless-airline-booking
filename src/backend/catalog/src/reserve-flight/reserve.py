@@ -6,29 +6,29 @@ from botocore.exceptions import ClientError
 
 session = boto3.Session()
 dynamodb = session.resource('dynamodb')
-table = dynamodb.Table(os.environ['FLIGHT_TABLE_NAME'])
+table = dynamodb.Table(os.environ['STAY_TABLE_NAME'])
 
 
-class FlightReservationException(Exception):
+class StayReservationException(Exception):
     pass
 
 
-class FlightFullyBookedException(FlightReservationException):
+class StayFullyBookedException(StayReservationException):
     pass
 
 
-class FlightDoesNotExistException(FlightReservationException):
+class StayDoesNotExistException(StayReservationException):
     pass
 
 
-def reserve_seat_on_flight(flight_id):
+def reserve_bed_on_stay(stay_id):
     try:
         table.update_item(
-            Key={"id": flight_id},
-            ConditionExpression="id = :idVal AND seatCapacity > zero",
-            UpdateExpression="SET seatCapacity = seatCapacity - :dec",
+            Key={"id": stay_id},
+            ConditionExpression="id = :idVal AND bedCapacity > zero",
+            UpdateExpression="SET bedCapacity = bedCapacity - :dec",
             ExpressionAttributeValues={
-                ":idVal": flight_id,
+                ":idVal": stay_id,
                 ":dec": 1,
                 ":zero": 0
             },
@@ -41,18 +41,18 @@ def reserve_seat_on_flight(flight_id):
         # Due to no specificity from the DDB error, this could also mean the flight
         # doesn't exist, but we should've caught that earlier in the flow.
         # TODO: Fix that. Could either use TransactGetItems, or Get then Update.
-        raise FlightFullyBookedException(f"Flight with ID: {flight_id} is fully booked.")
+        raise StayFullyBookedException(f"Stay with ID: {stay_id} is fully booked.")
     except ClientError as e:
-        raise FlightReservationException(e.response['Error']['Message'])
+        raise StayReservationException(e.response['Error']['Message'])
 
 
 def lambda_handler(event, context):
-    if 'outboundFlightId' not in event:
+    if 'stayBookedId' not in event:
         raise ValueError('Invalid arguments')
 
     try:
-        ret = reserve_seat_on_flight(event['outboundFlightId'])
-    except FlightReservationException as e:
-        raise FlightReservationException(e)
+        ret = reserve_bed_on_stay(event['stayBookedId'])
+    except StayReservationException as e:
+        raise StayReservationException(e)
 
     return json.dumps(ret)

@@ -26,7 +26,7 @@ class BookingReservationException(Exception):
 
 
 def is_booking_request_valid(booking):
-    return all(x in booking for x in ["outboundFlightId", "customerId", "chargeId"])
+    return all(x in booking for x in ["stayBookedId", "customerId", "chargeId"])
 
 
 @tracer.capture_method
@@ -59,7 +59,7 @@ def reserve_booking(booking):
     try:
         booking_id = str(uuid.uuid4())
         state_machine_execution_id = booking["name"]
-        outbound_flight_id = booking["outboundFlightId"]
+        outbound_flight_id = booking["stayBookedId"]
         customer_id = booking["customerId"]
         payment_token = booking["chargeId"]
 
@@ -67,7 +67,7 @@ def reserve_booking(booking):
             "id": booking_id,
             "stateExecutionId": state_machine_execution_id,
             "__typename": "Booking",
-            "bookingOutboundFlightId": outbound_flight_id,
+            "bookingStayBookedId": stay_booked_id,
             "checkedIn": False,
             "customer": customer_id,
             "paymentToken": payment_token,
@@ -76,7 +76,7 @@ def reserve_booking(booking):
         }
 
         logger.debug(
-            {"operation": "reserve_booking", "details": {"outbound_flight_id": outbound_flight_id}}
+            {"operation": "reserve_booking", "details": {"stay_booked_id": stay_booked_id}}
         )
         ret = table.put_item(Item=booking_item)
 

@@ -1,12 +1,12 @@
 // @ts-nocheck
 
-import Flight from 'src/shared/models/FlightClass'
+import Stay from 'src/shared/models/StayClass'
 import { SortPreference } from '../../shared/enums'
 import {
   sortByLowestPrice,
   sortByHighestPrice,
-  sortByEarliestDeparture,
-  sortByLatestDeparture
+  sortByEarliestCheckIn,
+  sortByLatestCheckIn
 } from '../../shared/sorters'
 
 /**
@@ -17,13 +17,13 @@ import {
  * @see {@link fetchFlights} for more info on action that calls SET_FLIGHTS
  * @see {@link fetchByFlightNumber} for more info on action that calls SET_FLIGHTS
  */
-export const SET_FLIGHTS = async (state, flights) => {
-  if (state.flights.length === 0) {
-    state.flights = flights
+export const SET_STAYS = async (state, stays) => {
+  if (state.stays.length === 0) {
+    state.stays = stays
   } else {
     // flatten array of flights and remove possible duplicates due to network issues
-    let newFlights = [...flights, state.flights].flat(5)
-    state.flights = [...new Set(newFlights)]
+    let newStays = [...stays, state.stays].flat(5)
+    state.stays = [...new Set(newStays)]
   }
 }
 
@@ -39,7 +39,7 @@ export const SET_LOADER = (state, isLoading) => {
   state.loading = isLoading
 }
 
-export const SET_FLIGHT_PAGINATION = (state, paginationToken) => {
+export const SET_STAY_PAGINATION = (state, paginationToken) => {
   state.paginationToken = paginationToken
 }
 
@@ -49,22 +49,22 @@ export const SET_FLIGHT_PAGINATION = (state, paginationToken) => {
  * @param {Flight[]} state.flights - Array of Flights
  * @param {SortPreference} preference - Sorting preference
  */
-export const SORT_FLIGHTS = (state, preference) => {
+export const SORT_STAYS = (state, preference) => {
   switch (preference) {
     case SortPreference.LowestPrice:
-      state.flights = sortByLowestPrice(state.flights)
+      state.stays = sortByLowestPrice(state.stays)
       break
 
     case SortPreference.HighestPrice:
-      state.flights = sortByHighestPrice(state.flights)
+      state.stays = sortByHighestPrice(state.stays)
       break
 
-    case SortPreference.EarliestDeparture:
-      state.flights = sortByEarliestDeparture(state.flights)
+    case SortPreference.EarliestCheckIn:
+      state.stays = sortByEarliestCheckIn(state.stays)
       break
 
-    case SortPreference.LatestDeparture:
-      state.flights = sortByLatestDeparture(state.flights)
+    case SortPreference.LatestCheckIn:
+      state.stays = sortByLatestCheckIn(state.stays)
       break
 
     default:

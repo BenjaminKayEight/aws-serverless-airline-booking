@@ -7,8 +7,8 @@
  * // return flights sorted from least to most expensive
  * const filteredFlights = sortByLowestPrice(flights)
  */
-export const sortByLowestPrice = (flights) => {
-  return flights.sort((a, b) => a.ticketPrice - b.ticketPrice)
+export const sortByLowestPrice = (stays) => {
+  return stays.sort((a, b) => a.stayPrice - b.stayPrice)
 }
 
 /**
@@ -20,6 +20,6 @@ export const sortByLowestPrice = (flights) => {
  * // return flights sorted from least to most expensive
  * const filteredFlights = sortByHighestPrice(flights)
  */
-export const sortByHighestPrice = (flights) => {
-  return flights.sort((a, b) => b.ticketPrice - a.ticketPrice)
+export const sortByHighestPrice = (stays) => {
+  return stays.sort((a, b) => b.stayPrice - a.stayPrice)
 }

@@ -1,4 +1,4 @@
-import Flight from 'src/shared/models/FlightClass'
+import Stay from 'src/shared/models/StayClass'
 
 /**
  * Catalog [Vuex Module](https://vuex.vuejs.org/guide/modules.html) - It holds flights information from Catalog service.
@@ -12,7 +12,7 @@ import Flight from 'src/shared/models/FlightClass'
  * @see {@link fetchByFlightNumber} for more info on module action
  */
 export default {
-  flights: [],
+  stays: [],
   loading: false,
   paginationToken: ''
 }

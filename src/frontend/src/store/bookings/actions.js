@@ -1,5 +1,5 @@
 import Booking from '../../shared/models/BookingClass'
-import Flight from '../../shared/models/FlightClass' // eslint-disable-line
+import Stay from '../../shared/models/StayClass' // eslint-disable-line
 // @ts-ignore
 import { Loading } from 'quasar'
 import { processPayment } from './payment'
@@ -118,7 +118,7 @@ export async function fetchBooking(
  */
 export async function createBooking(
   { rootState },
-  { paymentToken, outboundFlight }
+  { paymentToken, stayBooked }
 ) {
   console.group('store/bookings/actions/createBooking')
 
@@ -126,16 +126,16 @@ export async function createBooking(
     const customerEmail = rootState.profile.user.attributes.email
 
     console.info(
-      `Processing payment before proceeding to book flight ${outboundFlight}`
+      `Processing payment before proceeding to book stay ${stayBooked}`
     )
     let chargeToken = await processPayment({
       paymentToken,
-      outboundFlight,
+      stayBooked,
       customerEmail
     })
 
     console.info(
-      `Creating booking with token ${chargeToken} for flight ${outboundFlight.id}`
+      `Creating booking with token ${chargeToken} for stay ${stayBooked.id}`
     )
 
     Loading.show({ message: 'Creating a new booking...' })
@@ -143,7 +143,7 @@ export async function createBooking(
     const processBookingInput = {
       input: {
         paymentToken: chargeToken,
-        bookingOutboundFlightId: outboundFlight.id
+        bookingStayBookedId: stayBooked.id
       }
     }
 

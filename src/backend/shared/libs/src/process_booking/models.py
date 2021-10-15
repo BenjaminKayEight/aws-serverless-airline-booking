@@ -22,7 +22,7 @@ class ProcessBookingModel:
         Unique process booking state machine execution identifier, by default "UNDEFINED"
     """
 
-    outbound_flight_id: str
+    stay_booked_id: str
     customer_id: str
     charge_id: str
     state_machine_execution_id: str

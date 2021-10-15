@@ -6,12 +6,13 @@
           class="text-h4 search__headline q-pt-xl"
           data-test="search-headline"
         >
-          Where next?
+          Book Now! %Where next?
         </div>
       </div>
     </div>
     <div class="search__options">
       <div class="search__options--departure shadow-2 q-mb-xs">
+        <!--departure city to become bed -->
         <q-select
           data-test="search-departure"
           v-model="departureCity"
@@ -67,7 +68,7 @@
           </template>
         </q-select>
       </div>
-      <div class="search__options--arrival shadow-2 q-mb-lg">
+      <!-- <div class="search__options--arrival shadow-2 q-mb-lg">
         <q-select
           data-test="search-arrival"
           v-model="arrivalCity"
@@ -114,12 +115,12 @@
           </template>
         </q-select>
       </div>
-
+-->
       <div class="search__options--schedule row">
         <div class="col-6 shadow-2 search__options--outbound">
           <q-field
             class="search__date"
-            label="Outbound"
+            label="Check-in %Outbound"
             placeholder="When?"
             stack-label
             borderless
@@ -146,6 +147,39 @@
             </template>
           </q-field>
         </div>
+        <!-- checkout date
+        <div class="search__options--schedule row">
+        <div class="col-6 shadow-2 search__options--outbound">
+          <q-field
+            class="search__date"
+            label="Check-in %Outbound"
+            placeholder="When?"
+            stack-label
+            borderless
+            item-aligned
+            clearable
+          >
+            <template v-slot:after>
+              <q-icon name="event" color="primary" class="q-pt-lg" />
+            </template>
+            <template v-slot:control>
+              <q-popup-proxy ref="qDateProxy">
+                <div>
+                  <q-date
+                    v-model="departureDate"
+                    mask="MMM D, YYYY"
+                    color="primary"
+                    today-btn
+                    @input="() => $refs.qDateProxy.hide()"
+                    :options="scheduleOptions"
+                  />
+                </div>
+              </q-popup-proxy>
+              {{ departureDate }}
+            </template>
+          </q-field>
+        </div>
+        -->
         <div class="col"></div>
       </div>
     </div>

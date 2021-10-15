@@ -69,7 +69,7 @@ def _tracer_annotate_process_booking_sfn(process_booking_context: ProcessBooking
     tracer.put_annotation("Payment", process_booking_context.charge_id)
     tracer.put_annotation("Booking", process_booking_context.booking_id)
     tracer.put_annotation("Customer", process_booking_context.customer_id)
-    tracer.put_annotation("Flight", process_booking_context.outbound_flight_id)
+    tracer.put_annotation("Stay", process_booking_context.stay_booked_id)
     tracer.put_annotation(
         "StateMachineExecution", process_booking_context.state_machine_execution_id
     )
@@ -104,7 +104,7 @@ def _build_process_booking_model(event: Dict) -> ProcessBookingState:
         "customer_id": event.get("customerId", ""),
         "booking_id": event.get("bookingId", ""),
         "charge_id": event.get("chargeId", ""),
-        "outbound_flight_id": event.get("outboundFlightId", ""),
+        "stay_booked_id": event.get("stayBookedId", ""),
         "state_machine_execution_id": event.get("name", ""),
     }
 

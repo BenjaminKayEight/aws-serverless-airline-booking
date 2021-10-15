@@ -24,23 +24,14 @@ export const getBookingByStatus = `query GetBookingByStatus(
     items {
       id
       status
-      outboundFlight {
+      stay {
         id
-        departureDate
-        departureAirportCode
-        departureAirportName
-        departureCity
-        departureLocale
-        arrivalDate
-        arrivalAirportCode
-        arrivalAirportName
-        arrivalCity
-        arrivalLocale
-        ticketPrice
-        ticketCurrency
-        flightNumber
-        seatAllocation
-        seatCapacity
+        checkInDate
+       checkOutDate
+        stayPrice
+       bedCapacity
+       bedBooked
+    }
       }
       paymentToken
       checkedIn

@@ -1,8 +1,8 @@
-import Flight from '../../shared/models/FlightClass'
+import Stay from '../../shared/models/FlightClass'
 import { SortPreference } from '../../shared/enums'
 
 import { API, graphqlOperation } from '@aws-amplify/api'
-import { getFlightBySchedule, getFlight } from './graphql'
+import { getStayBySchedule, getStay } from './graphql'
 
 const catalogEndpoint =
   process.env.VUE_APP_CatalogEndpoint || 'no booking endpoint set'
@@ -37,9 +37,9 @@ const catalogEndpoint =
  *    this.filteredFlights = this.sortByDeparture(this.flights);
  * }
  */
-export async function fetchFlights(
+export async function fetchStays(
   { commit },
-  { date, departure, arrival, paginationToken = '' }
+  { date, checkIn, checkOut, paginationToken = '' }
 ) {
   console.group('store/booking/actions/fetchFlights')
   commit('SET_LOADER', true)
@@ -47,12 +47,12 @@ export async function fetchFlights(
   var nextToken = paginationToken || null
 
   try {
-    const flightOpts = {
-      departureAirportCode: departure,
-      arrivalAirportCodeDepartureDate: {
+    const stayOpts = {
+      checkInDate: checkIn,
+      checkOutDateCheckInDateDate: {
         beginsWith: {
-          arrivalAirportCode: arrival,
-          departureDate: date
+          checkOutDate: checkOut,
+          checkInDate: checkIn
         }
       },
       filter: { seatCapacity: { gt: 0 } },
@@ -60,26 +60,26 @@ export async function fetchFlights(
       nextToken: nextToken
     }
 
-    console.log('Fetching flight data')
-    console.log(flightOpts)
+    console.log('Fetching stay data')
+    console.log(stayOpts)
 
     const {
       // @ts-ignore
       data: {
-        getFlightBySchedule: { items: flightData, nextToken: paginationToken }
+        getStayBySchedule: { items: stayData, nextToken: paginationToken }
       }
-    } = await API.graphql(graphqlOperation(getFlightBySchedule, flightOpts))
+    } = await API.graphql(graphqlOperation(getStayBySchedule, stayOpts))
 
     // data mutations happen within a Flight class
     // here we convert graphQL results into an array of Flights
     // before committing to Vuex State Management
-    const flights = flightData.map((flight) => new Flight(flight))
+    const stays = stayData.map((stay) => new Stay(stay))
 
-    console.log(flights)
-    commit('SET_FLIGHTS', flights)
-    commit('SET_FLIGHT_PAGINATION', paginationToken)
+    console.log(stays)
+    commit('STAYS', stays)
+    commit('SET_STAY_PAGINATION', paginationToken)
     commit('SET_LOADER', false)
-    commit('SORT_FLIGHTS', SortPreference.EarliestDeparture)
+    commit('SORT_STAYS', SortPreference.EarliestCheckIn)
     console.groupEnd()
   } catch (error) {
     commit('SET_LOADER', false)
@@ -113,22 +113,22 @@ export async function fetchFlights(
  *    }
  * },
  */
-export async function fetchByFlightId({ commit }, { flightId }) {
-  console.group('store/booking/actions/fetchByFlightId')
+export async function fetchByStayId({ commit }, { stayId }) {
+  console.group('store/booking/actions/fetchByStayId')
 
   try {
     commit('SET_LOADER', true)
     const {
       // @ts-ignore
-      data: { getFlight: flightData }
-    } = await API.graphql(graphqlOperation(getFlight, { id: flightId }))
+      data: { getStay: stayData }
+    } = await API.graphql(graphqlOperation(getStay, { id: stayId }))
 
-    const flight = new Flight(flightData)
+    const stay = new Stay(stayData)
 
-    console.log(flight)
+    console.log(stay)
     commit('SET_LOADER', false)
     console.groupEnd()
-    return flight
+    return stay
   } catch (error) {
     console.error(error)
     commit('SET_LOADER', false)
@@ -148,6 +148,6 @@ export async function fetchByFlightId({ commit }, { flightId }) {
  * @param {SortPreference} preference - Sorting preferences
  * @see {@link SORT_FLIGHTS} for more info on mutation
  */
-export function sortFlightsByPreference({ commit }, preference) {
-  commit('SORT_FLIGHTS', preference)
+export function sortStaysByPreference({ commit }, preference) {
+  commit('SORT_STAYS', preference)
 }

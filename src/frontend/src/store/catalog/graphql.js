@@ -1,14 +1,13 @@
-export const getFlightBySchedule = `query GetFlightBySchedule(
-  $departureAirportCode: String
-  $arrivalAirportCodeDepartureDate: ModelFlightByDepartureScheduleCompositeKeyConditionInput
+export const getStayBySchedule = `query GetStayBySchedule(
+  $checkInDate: String
+  $checkOutDateCheckInDate: ModeStayByCheckInScheduleCompositeKeyConditionInput
   $sortDirection: ModelSortDirection
-  $filter: ModelFlightFilterInput
+  $filter: ModelStayFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  getFlightBySchedule(
-    departureAirportCode: $departureAirportCode
-    arrivalAirportCodeDepartureDate: $arrivalAirportCodeDepartureDate
+  getStayBySchedule(
+    checkOutDateCheckInDate: $checkOutDateCheckInDate
     sortDirection: $sortDirection
     filter: $filter
     limit: $limit
@@ -16,42 +15,25 @@ export const getFlightBySchedule = `query GetFlightBySchedule(
   ) {
     items {
       id
-      departureDate
-      departureAirportCode
-      departureAirportName
-      departureCity
-      departureLocale
-      arrivalDate
-      arrivalAirportCode
-      arrivalAirportName
-      arrivalCity
-      arrivalLocale
-      ticketPrice
-      ticketCurrency
-      flightNumber
-      seatCapacity
+      checkInDate
+      checkOutDate
+      stayPrice
+      bedCapacity
+      bedBooked
     }
     nextToken
   }
 }
 `
 
-export const getFlight = `query GetFlight($id: ID!) {
-  getFlight(id: $id) {
+export const getStay = `query GetStay($id: ID!) {
+  getStay(id: $id) {
     id
-    departureDate
-    departureAirportCode
-    departureAirportName
-    departureCity
-    departureLocale
-    arrivalDate
-    arrivalAirportCode
-    arrivalAirportName
-    arrivalCity
-    arrivalLocale
-    ticketPrice
-    ticketCurrency
-    flightNumber
+    checkInDate
+    checkOutDate
+    stayPrice
+    bedCapacity
+    bedBooked
   }
 }
 `

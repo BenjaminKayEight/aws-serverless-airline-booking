@@ -1,8 +1,8 @@
 // @ts-nocheck
 import { date } from 'quasar'
-import Flight from '../../shared/models/BedClass'
+import Flight from '../../shared/models/FlightClass'
 /** Class representing a Booking. All permutations of data from Booking, a different date format for instance, should happen here. */
-export default class NewBooking {
+export default class Booking {
   /**
    *
    * Creates an instance of Booking.
@@ -10,7 +10,7 @@ export default class NewBooking {
    * @param {string} [Booking.id] - Booking unique ID
    * @param {string} Booking.createdAt - Effective booking was created
    * @param {string} Booking.bookingReference - Booking reference
-   * @param {Flight} Booking.stayBooked - Outbound flight
+   * @param {Flight} Booking.outboundFlight - Outbound flight
    *
    * @todo Move to TS and create a Flight Interface
    * @example
@@ -38,10 +38,10 @@ export default class NewBooking {
    *    bookingReference: "Flkuc6"
    * });
    */
-  constructor({ id, createdAt, stayBooked, bookingReference }) {
+  constructor({ id, createdAt, outboundFlight, bookingReference }) {
     this.id = id
     this.createdAt = new Date(createdAt)
-    this.stayBooked = new Stay(stayBooked)
+    this.outboundFlight = new Flight(outboundFlight)
     this.bookingReference = bookingReference
   }
   /**

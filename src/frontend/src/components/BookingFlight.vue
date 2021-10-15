@@ -24,6 +24,7 @@ import FlightCard from './FlightCard'
 // @ts-ignore
 import BookingCard from './BookingCard'
 
+// @ts-ignore
 import { mapState, mapGetters } from 'vuex'
 
 export default {

@@ -1,4 +1,4 @@
-import Flight from '../../shared/models/FlightClass' // eslint-disable-line
+import Stay from '../../shared/models/StayClass' // eslint-disable-line
 import { Loading } from 'quasar'
 import axios from 'axios'
 
@@ -27,7 +27,7 @@ const paymentEndpoint =
  */
 export async function processPayment({
   paymentToken,
-  outboundFlight,
+  stayBooked,
   customerEmail
 }) {
   console.group('store/bookings/actions/processPayment')
@@ -38,8 +38,7 @@ export async function processPayment({
   if (!paymentToken) throw 'Invalid payment token'
 
   const chargeData = {
-    amount: outboundFlight.ticketPrice,
-    currency: outboundFlight.ticketCurrency,
+    amount: stayBooked.stayPrice,
     stripeToken: paymentToken.details.id,
     description: `Payment by ${customerEmail}`,
     email: customerEmail
