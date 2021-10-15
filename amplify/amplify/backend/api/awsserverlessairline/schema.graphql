@@ -1,3 +1,26 @@
+type Bed @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  bedCode: String
+}
+
+type Stay @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  checkInDate: AWSDate
+  checkOutDate: AWSDate
+  stay: Float
+}
+
+type NewBooking @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  status: BookingStatus
+  paymentToken: String
+  checkedIn: Boolean
+  customer: String
+  createdAt: String
+  BookingReference: String
+  stayBooked: Stay @connection
+}
+
 type Flight @model(subscriptions: null) @key(name: "ByDepartureSchedule", fields: ["departureAirportCode", "arrivalAirportCode", "departureDate"], queryField: "getFlightBySchedule") @auth(rules: [{allow: private}]) {
   id: ID!
   departureDate: String!

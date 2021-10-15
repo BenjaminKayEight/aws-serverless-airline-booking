@@ -8,11 +8,14 @@ const BookingStatus = {
   "CANCELLED": "CANCELLED"
 };
 
-const { Booking, Flight, Loyalty } = initSchema(schema);
+const { Booking, Flight, Bed, Stay, NewBooking, Loyalty } = initSchema(schema);
 
 export {
   Booking,
   Flight,
+  Bed,
+  Stay,
+  NewBooking,
   BookingStatus,
   Loyalty
 };
